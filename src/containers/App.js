@@ -10,6 +10,15 @@ import Cockpit from '../components/Cockpit/Cockpit'
  
   class App extends Component {
 
+
+
+    constructor(props){
+      super(props);
+      console.log('[App.js] constructor');
+    }
+
+
+
 //object which holds data
     state = {
 
@@ -27,11 +36,6 @@ import Cockpit from '../components/Cockpit/Cockpit'
 
 
 
-
-
-
-
-
     deletePersonHandler = (personIndex) =>{
       const persons = [...this.state.persons];
       persons.splice(personIndex, 1);
@@ -43,7 +47,27 @@ import Cockpit from '../components/Cockpit/Cockpit'
 
 
 
+    static getDerivedStateFromProps(props,state){
+      console.log('App.js getDerivedStateFromProps', props);
+      return state;
+    }
 
+    // componentWillMount(){
+    //   console.log('[App.js] componentWillMount');
+    // }
+
+    componentDidMount(){
+      console.log('[App.js] componentDidMount');
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+      console.log('[App.js] shouldComponentUpdate');
+      return true;
+    }
+
+    componentDidUpdate(){
+      console.log('[App.js] componentDidUpdate');
+    }
 
 
     nameChangedHandler = (event,id) =>{
@@ -60,16 +84,8 @@ import Cockpit from '../components/Cockpit/Cockpit'
       const persons = [...this.state.persons];
       persons[personIndex] = person;
 
-      this.setState({persons: person});
+      this.setState({persons: persons});
 
-
-      this.setState({
-        persons:[
-          {name: 'Max', age: 28},
-          {name: event.target.value, age: 29},
-          {name: 'Stephanie', age: 26}
-        ]
-      })
     }
 
 
@@ -93,13 +109,10 @@ import Cockpit from '../components/Cockpit/Cockpit'
 
       render() {
 
-
+        console.log('[App.js] render');
 
 
         let persons = null;
-        
-
-
 
 
         if(this.state.showPersons){
